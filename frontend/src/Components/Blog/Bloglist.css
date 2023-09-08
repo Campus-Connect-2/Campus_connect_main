@@ -4,7 +4,8 @@
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    width: 70vw;
+    width: 80vw;
+    font-family: "Montserrat";
   }
   
   .blog-item {
@@ -25,20 +26,25 @@
   
   .credentials{
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
   }
   .blog-left {
     flex: 1;
     width: fit-content;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+   
   }
   
   .blog-right {
     flex: 2;
-    margin-left: 0px; /* Adjust the ratio for the desired width of title and description */
+    margin-left: auto; /* Adjust the ratio for the desired width of title and description */
   }
   
   .blog-image {
-width: 70%;
+width: 150px;
 aspect-ratio: 3/2;
 border: 1px solid black;
   }
@@ -53,7 +59,14 @@ border: 1px solid black;
     margin-top: 5px;
     /* padding: 10px; */
     padding-top: 10px;
+    max-width: 60vw;
 
+  }
+  .blog_author_img{
+  height: 20px;
+  aspect-ratio: 1;
+  margin-right: 9px;
+  border-radius: 50%;
   }
   
   .blog-author {
@@ -65,7 +78,6 @@ border: 1px solid black;
   .blog-tags {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 10px;
     position: relative;
   }
   
@@ -116,4 +128,12 @@ border: 1px solid black;
     .blog-short-description{
       display: none;
     }
+  }
+
+  .meta_data_blog{
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    font-size: 0.9rem;
+    margin-top: 25px;
   }

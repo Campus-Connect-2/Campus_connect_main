@@ -9,15 +9,15 @@ const App = () => {
   const blogs = [
     {
       id: 1,
-      title: 'Blockchain dev',
+      title: 'Moving towards Blockchain',
       imageUrl: 'https://picsum.photos/200',
-      shortDescription: 'Short description of Blog 1 lorejfdsnqxijadsnxnIDJNIADSHMIjxmMdskxxndas',
+      shortDescription: 'Short description of Blog 1 lorejfdsnqxijadsnxnIDJN IADSHMIjxmMdskxxndas',
       author: 'Somya',
       tags: ['Web3', 'Javascript'],
     },
     {
       id: 2,
-      title: 'Consulting roadmap',
+      title: 'A roadmap to Consulting',
       imageUrl: 'https://picsum.photos/100',
       shortDescription: 'Short description of Blog 2',
       author: 'Sudeep',
