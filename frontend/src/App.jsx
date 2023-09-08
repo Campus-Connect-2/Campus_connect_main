@@ -2,6 +2,7 @@
 
 import React from 'react';
 import BlogList from './Components/Blog/Bloglist';
+import New_Blog from './Components/Blog/New_Blog';
 // import './App.css'; 
 
 const App = () => {
@@ -36,7 +37,9 @@ const App = () => {
 
   return (
     <div className="App">
-      <BlogList blogs={blogs} />
+      {/* <BlogList blogs=
+      {blogs} /> */}
+      <New_Blog/>
     </div>
   );
 };
