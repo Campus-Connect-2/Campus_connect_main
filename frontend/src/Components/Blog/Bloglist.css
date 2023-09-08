@@ -50,7 +50,8 @@ border: 1px solid black;
   }
   
   .blog-title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
     /* margin: 10px 0; */
   }
   
@@ -82,7 +83,7 @@ border: 1px solid black;
   }
   
   .tag {
-    background-color: purple;
+    background-color: rgb(111, 109, 109);
     color: #fff;
     padding: 3px 10px;
     border-radius: 3px;
