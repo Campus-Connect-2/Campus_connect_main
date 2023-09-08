@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// App.js
 
-function App() {
-  const [count, setCount] = useState(0)
+import React from 'react';
+import BlogList from './Components/Blog/Bloglist';
+// import './App.css'; 
+
+const App = () => {
+
+  const blogs = [
+    {
+      id: 1,
+      title: 'Blockchain dev',
+      imageUrl: 'https://picsum.photos/200',
+      shortDescription: 'Short description of Blog 1 lorejfdsnqxijadsnxnIDJNIADSHMIjxmMdskxxndas',
+      author: 'Somya',
+      tags: ['Web3', 'Javascript'],
+    },
+    {
+      id: 2,
+      title: 'Consulting roadmap',
+      imageUrl: 'https://picsum.photos/100',
+      shortDescription: 'Short description of Blog 2',
+      author: 'Sudeep',
+      tags: ['Case studies', 'Markets'],
+    },
+    {
+      id: 3,
+      title: 'Competitive programming',
+      imageUrl: 'https://picsum.photos/43',
+      shortDescription: 'Short description of Blog 3',
+      author: 'Somya',
+      tags: ['DSA', 'Codeforces'],
+    },
+    // Add more blog objects here...
+  ];
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="App">
+      <BlogList blogs={blogs} />
+    </div>
+  );
+};
 
-export default App
+export default App;
