@@ -1,9 +1,13 @@
-// App.js
-
 import React from 'react';
+
+import {BrowserRouter as Router, Routes, Route, useParams} from "react-router-dom"
+
 import BlogList from './Components/Blog/Bloglist';
 import New_Blog from './Components/Blog/New_Blog';
-// import './App.css'; 
+import { Auth } from './Components/Auth/Auth';
+import LandingPage from './Components/LandingPage/LandingPage'; 
+import Blog from './Components/Blog/Blog';
+ 
 
 const App = () => {
 
@@ -37,9 +41,26 @@ const App = () => {
 
   return (
     <div className="App">
-      {/* <BlogList blogs=
-      {blogs} /> */}
-      <New_Blog/>
+             <Router>
+      <Routes>
+        <Route index path="/" element={<LandingPage/>} />
+
+        <Route path="/blogs" element={<BlogList blogs={blogs}/>} />
+
+        <Route path="/new_blog" element={<New_Blog/>} />
+
+      
+        <Route path="/signin" element={<Auth/>} />
+     <Route path="/blog/:id" element={<Blog/>}/>
+        {/* <Route path="/blog/:content" element={<Blog content={
+          {
+            content: useParams()
+          }
+        }/>} /> */}
+
+
+      </Routes>
+  </Router>
     </div>
   );
 };

@@ -1,17 +1,60 @@
 // BlogList.js
 
-import React from 'react';
+
+/*
+testing db
+*/
+import { db } from '../../../Firebase/firebase'
+import {getDocs, collection} from "firebase/firestore"
+
+import React, {useState, useEffect} from 'react';
 import "./Bloglist.css"
 import Topics from './Topics';
 import {CiSaveDown2} from 'react-icons/ci'
 
 
 //fonts
-import "@fontsource/montserrat"; // Defaults to weight 400
-import "@fontsource/montserrat/400.css"; // Specify weight
-import "@fontsource/montserrat/400-italic.css"; // Specify weight and style
+import "@fontsource/montserrat"; 
+import "@fontsource/montserrat/400.css"; 
+import "@fontsource/montserrat/400-italic.css";
+import { Navigate, useNavigate } from 'react-router-dom';
 
-const BlogList = ({ blogs }) => {
+
+const BlogList = () => {
+
+
+/* testing db */
+const navigate= useNavigate()
+const [blogs, setBlogs] = useState([]);
+
+const blogsCollection = collection(db, "blogs")
+
+
+
+useEffect(()=>{
+  const getBlogs= async()=>{
+       
+       try {
+        const data = await getDocs(blogsCollection)
+        const res=data.docs.map((doc)=> (
+          {
+            ...doc.data(), id:doc.id
+          }
+        ))
+        console.log(res)
+         setBlogs(res)
+       } catch (error) {
+          alert(error)
+       }
+
+     
+  }
+
+  getBlogs()
+}, [])
+
+
+
   return (
     <>
     <h1>Blogs</h1>
@@ -19,7 +62,7 @@ const BlogList = ({ blogs }) => {
     <button className='write_blog'>Write your own blog..</button>
     <div className="blog-list">
       {blogs.map((blog, index) => (
-        <div key={blog.id} className="blog-item">
+        <div className="blog-item">
         
           <div className="blog-right">
             <div className='credentials'>
@@ -39,7 +82,7 @@ const BlogList = ({ blogs }) => {
               <div className='save_blog'><CiSaveDown2/></div>
     {/*CiSaveDown2 */}        
             <div className="blog-tags">
-              {blog.tags.map((tag) => (
+              {blog.tags?.map((tag) => (
                 <span key={tag} className="tag">
                   {tag}
                 </span>
