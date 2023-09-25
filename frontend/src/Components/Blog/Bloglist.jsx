@@ -95,7 +95,7 @@ useEffect(()=>{
     {/*CiSaveDown2 */}        
             <div className="blog-tags">
               {blog.tags?.map((tag) => (
-                <span key={tag} className="tag">
+                <span className="tag">
                   {tag}
                 </span>
               ))}

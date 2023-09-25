@@ -152,11 +152,26 @@ border: 1px solid black;
       flex-direction: column;
     }
 
-    .blog-short-description{
-      display: none;
-    }
+   
+  }
+  @media (max-width : 760px){
+  .blog-tags{
+    scale: 0.8;
+  }
+  .blog-image{
+    display: none;
+  }
+  .blog-short-description{
+    max-height: 10px;
   }
 
+  .write-first-blog button{
+    top: 10px;
+    height: 30%;
+  }
+  
+
+  }
   .meta_data_blog{
     display: flex;
     justify-content: flex-start;
