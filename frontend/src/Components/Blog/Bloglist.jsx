@@ -57,9 +57,21 @@ useEffect(()=>{
 
   return (
     <>
+      <div className="write-first-blog">
+        <p>Write your own blog</p>
+        <div className='write-first-blog-desc'>From technical tutorials to startup experiences, dive into a world of insights and learning</div>
+        <button
+          className="write_blog"
+          onClick={() => {
+            navigate('../new_blog');
+          }}
+        >
+          Write Blog ➔
+        </button>
+      </div>
     <h1>Blogs</h1>
     <Topics/>
-    <button className='write_blog'>Write your own blog..</button>
+    
     <div className="blog-list">
       {blogs.map((blog, index) => (
         <div className="blog-item">

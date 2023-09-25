@@ -14,7 +14,6 @@ const logos = [
   { id: 4, src: 'https://picsum.photos/277', caption: 'Logo 4' },
   { id: 3, src: 'https://picsum.photos/71', caption: 'Experiences' },
   { id: 4, src: 'https://picsum.photos/91', caption: 'Logo 4' },
-  // Add more logo objects here...
 ];
 
 const Topics = () => {
