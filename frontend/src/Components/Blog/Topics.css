@@ -5,7 +5,8 @@
     overflow-x: auto;
     padding: 10px;
     margin-bottom: 30px;
-    width: 80%;
+    width: 60vw;
+   justify-content: center;
   }
 
   .horizontal-scrollable-logos::-webkit-scrollbar{

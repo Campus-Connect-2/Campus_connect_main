@@ -19,6 +19,8 @@ import "@fontsource/montserrat/400.css";
 import "@fontsource/montserrat/400-italic.css";
 import { Navigate, useNavigate } from 'react-router-dom';
 
+import Recommendations from "./Recommendations/Recommendations"
+
 
 const BlogList = () => {
 
@@ -53,7 +55,9 @@ useEffect(()=>{
   getBlogs()
 }, [])
 
-
+const Add_fav_blog = (blog)=>{
+  console.log("your favourite blog is ", blog.title)
+}
 
   return (
     <>
@@ -69,7 +73,8 @@ useEffect(()=>{
           Write Blog ➔
         </button>
       </div>
-    <h1>Blogs</h1>
+ <div className="overall">
+  <div className="lefty">
     <Topics/>
     
     <div className="blog-list">
@@ -87,11 +92,13 @@ useEffect(()=>{
             </div>
             <div className="blog-short-description">{blog.shortDescription}</div>
             <div className='meta_data_blog'>
-              <div className="date">25th Jan</div>
+              <div className="date">{blog.date}</div>
               <div className="length">
-                6 min read
+               {`${blog.readtime} min read`} 
               </div>
-              <div className='save_blog'><CiSaveDown2/></div>
+              <div className='save_blog' onClick={()=>{
+                Add_fav_blog(blog)
+              }}><CiSaveDown2/></div>
     {/*CiSaveDown2 */}        
             <div className="blog-tags">
               {blog.tags?.map((tag) => (
@@ -105,13 +112,20 @@ useEffect(()=>{
           </div>
           <div className="blog-left">
             <img
-              src={blog.imageUrl}
+              src={blog.image}
               alt={blog.title}
               className="blog-image"
             />
           </div>
         </div>
       ))}
+     
+      </div>
+     
+      </div>
+      <div className="righty">
+       <Recommendations/>
+      </div>
     </div>
     </>
   );

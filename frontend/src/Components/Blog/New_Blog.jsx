@@ -4,9 +4,9 @@ import 'react-quill/dist/quill.snow.css';
 import DOMPurify from 'dompurify';
 import { auth } from '../../../Firebase/firebase';
 import { db } from '../../../Firebase/firebase';
-import { storage } from '../../../Firebase/firebase';
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-import {ref} from "firebase/storage";
+import {v4} from "uuid"
 
 import { getDocs, collection, addDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
@@ -21,7 +21,9 @@ const New_Blog = () => {
   const [tags, setTags] = useState([]);
   const [tagInput, setTagInput] = useState('');
   const [image, setImage] = useState(null);
-  const [isImageModalOpen, setImageModalOpen] = useState(false); // State to manage the image modal
+  const [isImageModalOpen, setImageModalOpen] = useState(false);
+  const [publishing, setPublishing]= useState(false) // State to manage the image modal
+  const storage = getStorage();
 
   const modules = {
     toolbar: [
@@ -52,7 +54,6 @@ const New_Blog = () => {
   const openImageModal = () => {
     document.getElementById('whole').style.opacity=0.5;
     setImageModalOpen(true);
-    console.log(isImageModalOpen)
   };
 
   const closeImageModal = () => {
@@ -60,7 +61,52 @@ const New_Blog = () => {
     setImageModalOpen(false);
   };
 
+  function formatDate(date) {
+    const day = date.getDate();
+    const month = date.toLocaleString('en-US', { month: 'short' });
+   
+  
+   
+    function getDayWithSuffix(day) {
+      if (day >= 11 && day <= 13) {
+        return day + 'th';
+      }
+      switch (day % 10) {
+        case 1:
+          return day + 'st';
+        case 2:
+          return day + 'nd';
+        case 3:
+          return day + 'rd';
+        default:
+          return day + 'th';
+      }
+    }
+  
+    const formattedDate = `${getDayWithSuffix(day)} ${month}`;
+  
+    return formattedDate;
+  }
+  
+  
+ 
+  function calculateReadingTime(text, wordsPerMinute = 200) {
+    
+  const wordCount = text.split(/\s+/).length;
+    
+  const readingTimeMinutes = wordCount / wordsPerMinute;
+
+  return Math.ceil(readingTimeMinutes);
+ }
+  
+  
+  
+
+  
+
   const Publish = async () => {
+   
+    console.log(publishing)
     setContent(DOMPurify.sanitize(content));
     if (!auth || !auth.currentUser) {
       console.log('unsigned');
@@ -72,40 +118,47 @@ const New_Blog = () => {
     
     const sanitizedContent = content?.replace(/<\/?[^>]+>/g, "");
     const desc = sanitizedContent.match(/\b\w+\b/g);
+    const date = new Date();
+    const formattedDate = formatDate(date);
     const blogData = {
       title: title,
       content: content,
       author: auth?.currentUser?.email,
       tags: tags,
+      date: formattedDate,
+      readtime: calculateReadingTime(content),
       shortDescription: desc.slice(0, 10).join(' ') 
     };
 
- 
+   
     if (image) {
-      // Handle image upload here
       try {
-        const storageRef = storage.ref();
-        const imageRef = storageRef.child(`blog_images/${image.name}`);
-        await imageRef.put(image);
-        const imageUrl = await imageRef.getDownloadURL();
-
-        blogData.image=imageUrl;
-       
+        const imageRef = ref(storage, `blog_images/${image.name + v4()}`);
+        console.log("reffed");
+        await uploadBytes(imageRef, image);
+       console.log("uplaoded");
+        const imageUrl = await getDownloadURL(imageRef);
+        console.log(imageUrl);
+      
+        blogData.image = imageUrl;
         
+       
       } catch (error) {
-        console.log(error);
+        alert(error);
+        console.log("hello")
+        console.error(error);
       }
-     
-    } 
+    }
     
-
-    try{ await addDoc(blogsCollection, blogData);
+    try{ 
+      await addDoc(blogsCollection, blogData);
     }catch(error){
       alert(error)
     }
 
-      
-    navigate('../blogs');
+    
+    navigate("../blogs")
+  
 
 
 
@@ -114,6 +167,7 @@ const New_Blog = () => {
   return (
 
     <>
+    {publishing && <span className="loader"></span>}
     {isImageModalOpen && (
         <div className="image-upload-modal">
           <h2>Add an Image for the Blog</h2>
@@ -123,6 +177,7 @@ const New_Blog = () => {
             accept="image/*"
             onChange={handleImageUpload}
           />
+
          <span className="close-icon" onClick={closeImageModal}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" enable-background="new 0 0 40 40">
               <line x1="15" y1="15" x2="25" y2="25" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-miterlimit="10"></line>
