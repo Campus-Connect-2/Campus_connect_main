@@ -9,6 +9,7 @@ import LandingPage from './Components/LandingPage/LandingPage';
 import Blog from './Components/Blog/Blog';
 import { SignIn } from './Components/Auth/Signin';
 import Profile from './Components/Profile/Profile';
+import Navbar from './Components/Navbar/Navbar';
  
 
 const App = () => {
@@ -44,6 +45,7 @@ const App = () => {
   return (
     <div className="App">
              <Router>
+              <Navbar/>
       <Routes>
         <Route index path="/" element={<LandingPage/>} />
 

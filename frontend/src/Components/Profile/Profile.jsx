@@ -16,7 +16,7 @@ const Profile = () => {
   return (
     <>
   
-    <ProfileStrength profileStrength={90}/>
+    <ProfileStrength profileStrength={20}/>
     <ProfilePictureModal 
     isOpen={isProfilePicModalOpen}     setOpen={setProfilePicOpen}/>
     <InterestsModal
@@ -29,13 +29,13 @@ const Profile = () => {
     <UserProfile/>
     <button onClick={()=>{
         setProfilePicOpen(true)
-    }}>Add your display picture</button>
+    }}> Update display picture</button>
     <button onClick={()=>{
         setInterestsOpen(true)
-    }}>Add your Interests</button>
+    }}>Update Interests</button>
     <button onClick={()=>{
         setGoalsOpen(true)
-    }}>Add your Goals</button>
+    }}>Update Goals</button>
     </>
 
   )
