@@ -6,7 +6,10 @@
     padding: 10px;
     margin-bottom: 30px;
     width: 60vw;
+    font-family: "Montserrat";
    justify-content: center;
+   font-size: small;
+   font-weight: 600;
   }
 
   .horizontal-scrollable-logos::-webkit-scrollbar{

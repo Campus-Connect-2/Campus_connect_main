@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Routes, Route, useParams} from "react-router-do
 
 import BlogList from './Components/Blog/Bloglist';
 import New_Blog from './Components/Blog/New_Blog';
-import { Auth } from './Components/Auth/Auth';
+import { Signup} from './Components/Auth/Signup';
 import LandingPage from './Components/LandingPage/LandingPage'; 
 import Blog from './Components/Blog/Blog';
  
@@ -50,7 +50,7 @@ const App = () => {
         <Route path="/new_blog" element={<New_Blog/>} />
 
       
-        <Route path="/signin" element={<Auth/>} />
+        <Route path="/signup" element={<Signup/>} />
      <Route path="/blogs/:id" element={<Blog/>}/>
         {/* <Route path="/blog/:content" element={<Blog content={
           {
