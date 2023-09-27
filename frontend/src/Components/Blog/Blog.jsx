@@ -3,15 +3,16 @@ import { useParams } from 'react-router-dom'
 import { db } from '../../../Firebase/firebase'
 import {getDocs, collection} from "firebase/firestore"
 import {useEffect, useState} from 'react'
+import BlogComponent from './BlogComponent'
 
 const Blog = () => {
 
-    const [blog, setBlog] = useState({});
+  const [blog, setBlog] = useState({});
 
   const blogsCollection = collection(db, "blogs")
   
   const {id} = useParams()
-  console.log(id);
+
 
   useEffect(()=>{
     const getBlogs= async()=>{
@@ -22,15 +23,16 @@ const Blog = () => {
             {
               ...doc.data(), id:doc.id
             }
+           
           ))
-          console.log(res)
-          let thisblog = res.find((blog) => blog.author === id);
-           console.log(thisblog)
+          
+          let thisblog = res.find((blog) => blog.uniqueid === id);
+           
            setBlog(thisblog)
          } catch (error) {
             alert(error)
          }
-
+    console.log(blog)
        
     }
 
@@ -45,10 +47,7 @@ const Blog = () => {
         )
      }
       return (
-        <div>
-          <h>{blog.title}</h>
-          <div dangerouslySetInnerHTML={{ __html: blog.content }} />
-        </div>
+       <BlogComponent blog={blog}/>
       );
 }
 

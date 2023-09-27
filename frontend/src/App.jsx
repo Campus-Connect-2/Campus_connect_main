@@ -51,7 +51,7 @@ const App = () => {
 
       
         <Route path="/signin" element={<Auth/>} />
-     <Route path="/blog/:id" element={<Blog/>}/>
+     <Route path="/blogs/:id" element={<Blog/>}/>
         {/* <Route path="/blog/:content" element={<Blog content={
           {
             content: useParams()

@@ -121,6 +121,7 @@ const New_Blog = () => {
     const date = new Date();
     const formattedDate = formatDate(date);
     const blogData = {
+      uniqueid: v4(),
       title: title,
       content: content,
       author: auth?.currentUser?.email,
@@ -134,18 +135,16 @@ const New_Blog = () => {
     if (image) {
       try {
         const imageRef = ref(storage, `blog_images/${image.name + v4()}`);
-        console.log("reffed");
+       
         await uploadBytes(imageRef, image);
-       console.log("uplaoded");
+       
         const imageUrl = await getDownloadURL(imageRef);
         console.log(imageUrl);
-      
         blogData.image = imageUrl;
-        
-       
+
       } catch (error) {
         alert(error);
-        console.log("hello")
+        
         console.error(error);
       }
     }
@@ -158,9 +157,6 @@ const New_Blog = () => {
 
     
     navigate("../blogs")
-  
-
-
 
   };
 

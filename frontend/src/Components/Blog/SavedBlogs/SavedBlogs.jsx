@@ -1,23 +1,23 @@
 // src/UserList.js
 import React, { useEffect, useState } from 'react';
 import {db} from "../../../../Firebase/firebase"
-import './Recommendations.css';
+import './SavedBlogs.css';
 import {getDocs, collection} from "firebase/firestore"
 
-function Recommendations() {
+function SavedBlogs() {
   /* testing db */
 
 const [users, setUsers] = useState([]);
 
-const usersCollection = collection(db, "users")
+const savedBlogsCollection = collection(db, "users")
 
 
 
 useEffect(()=>{
-  const getUsers= async()=>{
+  const getSavedBlogs= async()=>{
        
        try {
-        const data = await getDocs(usersCollection)
+        const data = await getDocs(savedBlogsCollection)
         const res=data.docs.map((doc)=> (
           {
             ...doc.data(), id:doc.id
@@ -53,4 +53,4 @@ useEffect(()=>{
   );
 }
 
-export default Recommendations;
+export default SavedBlogs;

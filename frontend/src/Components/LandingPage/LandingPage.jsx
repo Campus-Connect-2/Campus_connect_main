@@ -3,6 +3,8 @@ import { auth } from '../../../Firebase/firebase'
 import { db } from '../../../Firebase/firebase'
 import {getDocs, collection} from "firebase/firestore"
 
+
+
 const LandingPage = () => {
 
   const [users, setUsers] = useState([]);
@@ -34,6 +36,7 @@ const LandingPage = () => {
   return (
     <>
     <div>hello {auth?.currentUser?.email}</div>
+ 
     </>
   )
 }

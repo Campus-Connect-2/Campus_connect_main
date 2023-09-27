@@ -4,7 +4,7 @@
 /*
 testing db
 */
-import { db } from '../../../Firebase/firebase'
+import { auth, db } from '../../../Firebase/firebase'
 import {getDocs, collection} from "firebase/firestore"
 
 import React, {useState, useEffect} from 'react';
@@ -17,7 +17,8 @@ import {CiSaveDown2} from 'react-icons/ci'
 import "@fontsource/montserrat"; 
 import "@fontsource/montserrat/400.css"; 
 import "@fontsource/montserrat/400-italic.css";
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
+
 
 import Recommendations from "./Recommendations/Recommendations"
 
@@ -29,13 +30,14 @@ const BlogList = () => {
 const navigate= useNavigate()
 const [blogs, setBlogs] = useState([]);
 
+const currentUser = auth?.currentUser;
+
 const blogsCollection = collection(db, "blogs")
 
 
 
 useEffect(()=>{
-  const getBlogs= async()=>{
-       
+  const getBlogs= async()=>{      
        try {
         const data = await getDocs(blogsCollection)
         const res=data.docs.map((doc)=> (
@@ -47,17 +49,23 @@ useEffect(()=>{
          setBlogs(res)
        } catch (error) {
           alert(error)
-       }
-
-     
+       } 
   }
 
   getBlogs()
 }, [])
 
-const Add_fav_blog = (blog)=>{
-  console.log("your favourite blog is ", blog.title)
-}
+
+const saveBlogToUserCollection = (blog) => {
+ //to do
+  
+};
+
+
+const handleBlogClick = (blogId) => {
+  navigate(`/blogs/${blogId}`);
+};
+
 
   return (
     <>
@@ -79,7 +87,9 @@ const Add_fav_blog = (blog)=>{
     
     <div className="blog-list">
       {blogs.map((blog, index) => (
-        <div className="blog-item">
+        <div className="blog-item" key={blog.uniqueid}
+        onClick={() => handleBlogClick(blog.uniqueid)}
+        >
         
           <div className="blog-right">
             <div className='credentials'>
@@ -96,9 +106,7 @@ const Add_fav_blog = (blog)=>{
               <div className="length">
                {`${blog.readtime} min read`} 
               </div>
-              <div className='save_blog' onClick={()=>{
-                Add_fav_blog(blog)
-              }}><CiSaveDown2/></div>
+              <div className='save_blog' onClick={() => saveBlogToUserCollection(blog)}><CiSaveDown2/></div>
     {/*CiSaveDown2 */}        
             <div className="blog-tags">
               {blog.tags?.map((tag) => (
