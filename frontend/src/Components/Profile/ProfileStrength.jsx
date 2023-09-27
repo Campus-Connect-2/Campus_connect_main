@@ -33,13 +33,16 @@ const ProfileStrength = ({ profileStrength }) => {
 
   return (
     <>
+    <div className="profile-judge">
    <h3>ProfileStrength</h3> 
+      
+   <h3 className= "profile-type"style={TypeStyle}>{type}</h3>
+   </div>
     <div className={`progress-bar ${progressBarColorClass}`}>
       <div className="progress" style={progressBarStyle}></div>
       
     </div>
-   
-    <center style={TypeStyle}>{type}</center>
+
     </>
   );
 };

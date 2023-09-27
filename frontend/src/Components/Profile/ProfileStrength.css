@@ -1,8 +1,19 @@
+.profile-judge{
+  display: flex;
+  align-items: center;
+}
+
+.profile-type{
+  margin-left: 10px;
+  font-size: 20px;
+}
+
 .progress-bar {
     background-color: #ccc;
     height: 20px;
     border-radius: 4px;
     overflow: hidden;
+    margin-bottom: 20px;
   }
   
   .progress {

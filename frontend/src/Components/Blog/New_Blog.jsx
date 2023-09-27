@@ -134,10 +134,10 @@ const New_Blog = () => {
 
   const Publish = async () => {
    
-    console.log(publishing)
+   
     setContent(DOMPurify.sanitize(content));
     if (!auth || !auth.currentUser) {
-      console.log('unsigned');
+     
       alert('Please sign in to publish your blog');
       return;
     }

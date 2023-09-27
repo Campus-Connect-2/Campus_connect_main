@@ -4,6 +4,7 @@ import ProfileStrength from './ProfileStrength'
 import ProfilePictureModal from './ProfilePictureModal';
 import InterestsModal from './InterestsModal';
 import GoalsModal from './GoalsModal';
+import UserProfile from './UserProfile';
 
 const Profile = () => {
 
@@ -14,7 +15,18 @@ const Profile = () => {
  const [isGoalsModalOpen, setGoalsOpen] = useState(false);
   return (
     <>
-    <div>Profile</div>
+  
+    <ProfileStrength profileStrength={90}/>
+    <ProfilePictureModal 
+    isOpen={isProfilePicModalOpen}     setOpen={setProfilePicOpen}/>
+    <InterestsModal
+    isOpen={isInterestsModalOpen}
+    setOpen={setInterestsOpen}/>
+    <GoalsModal
+    isOpen={isGoalsModalOpen}
+    setOpen={setGoalsOpen}/>
+
+    <UserProfile/>
     <button onClick={()=>{
         setProfilePicOpen(true)
     }}>Add your display picture</button>
@@ -24,16 +36,8 @@ const Profile = () => {
     <button onClick={()=>{
         setGoalsOpen(true)
     }}>Add your Goals</button>
-    <ProfileStrength profileStrength={50}/>
-    <ProfilePictureModal 
-    isOpen={isProfilePicModalOpen}     setOpen={setProfilePicOpen}/>
-    <InterestsModal
-    isOpen={isInterestsModalOpen}
-    setOpen={setInterestsOpen}/>
-    <GoalsModal
-    isOpen={isGoalsModalOpen}
-    setOpen={setGoalsOpen}/>
     </>
+
   )
 }
 
