@@ -87,8 +87,7 @@ const New_Blog = () => {
   
     return formattedDate;
   }
-  
-  
+
  
   function calculateReadingTime(text, wordsPerMinute = 200) {
     
@@ -99,9 +98,38 @@ const New_Blog = () => {
   return Math.ceil(readingTimeMinutes);
  }
   
-  
-  
 
+  function extractFirstSentence(htmlContent) {
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlContent, "text/html");
+
+  let firstSentence = "";
+
+ 
+  const textNodes = doc.body.childNodes;
+  for (let i = 0; i < textNodes.length; i++) {
+    const textNode = textNodes[i];
+    if (textNode.nodeType === Node.TEXT_NODE) {
+      const text = textNode.textContent.trim();
+      if (text) {
+        const sentences = text.split(/[.!?]/);
+  
+        for (const sentence of sentences) {
+          if (sentence.trim()) {
+            firstSentence = sentence.trim();
+            break;
+          }
+        }
+        if (firstSentence) {
+          break;
+        }
+      }
+    }
+  }
+
+  return firstSentence;
+}
   
 
   const Publish = async () => {
@@ -117,7 +145,6 @@ const New_Blog = () => {
    
     
     const sanitizedContent = content?.replace(/<\/?[^>]+>/g, "");
-    const desc = sanitizedContent.match(/\b\w+\b/g);
     const date = new Date();
     const formattedDate = formatDate(date);
     const blogData = {
@@ -128,7 +155,7 @@ const New_Blog = () => {
       tags: tags,
       date: formattedDate,
       readtime: calculateReadingTime(content),
-      shortDescription: desc.slice(0, 10).join(' ') 
+      shortDescription: extractFirstSentence(sanitizedContent).substring(0,24)+"..."
     };
 
    
@@ -189,7 +216,7 @@ const New_Blog = () => {
       <button className="publish-button" onClick={openImageModal}>
         Publish
       </button>
-      <h1> {auth?.currentUser?.email}</h1>
+     
       
       <input
         className="editor-title"

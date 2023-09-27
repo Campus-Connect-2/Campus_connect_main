@@ -7,6 +7,7 @@ import New_Blog from './Components/Blog/New_Blog';
 import { Signup} from './Components/Auth/Signup';
 import LandingPage from './Components/LandingPage/LandingPage'; 
 import Blog from './Components/Blog/Blog';
+import { SignIn } from './Components/Auth/Signin';
  
 
 const App = () => {
@@ -51,6 +52,7 @@ const App = () => {
 
       
         <Route path="/signup" element={<Signup/>} />
+        <Route path="/signin" element={<SignIn/>} />
      <Route path="/blogs/:id" element={<Blog/>}/>
         {/* <Route path="/blog/:content" element={<Blog content={
           {
