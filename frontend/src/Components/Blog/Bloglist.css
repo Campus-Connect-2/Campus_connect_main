@@ -167,6 +167,8 @@ align-items: center;
     display: none;
   }
   .blog-list{
+    display: flex;
+    justify-content: center;
     width: 80vw;
   }
   .blog-short-description{
