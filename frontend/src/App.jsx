@@ -8,6 +8,7 @@ import { Signup} from './Components/Auth/Signup';
 import LandingPage from './Components/LandingPage/LandingPage'; 
 import Blog from './Components/Blog/Blog';
 import { SignIn } from './Components/Auth/Signin';
+import Profile from './Components/Profile/Profile';
  
 
 const App = () => {
@@ -49,7 +50,7 @@ const App = () => {
         <Route path="/blogs" element={<BlogList blogs={blogs}/>} />
 
         <Route path="/new_blog" element={<New_Blog/>} />
-
+        <Route path="/profile" element={<Profile/>} />
       
         <Route path="/signup" element={<Signup/>} />
         <Route path="/signin" element={<SignIn/>} />

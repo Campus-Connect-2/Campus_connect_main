@@ -45,7 +45,7 @@ useEffect(()=>{
             ...doc.data(), id:doc.id
           }
         ))
-        console.log(res)
+        
          setBlogs(res)
        } catch (error) {
           alert(error)
@@ -88,11 +88,11 @@ const handleBlogClick = (blogId) => {
     <div className="blog-list">
       {blogs.map((blog, index) => (
         <div className="blog-item" key={blog.uniqueid}
-        onClick={() => handleBlogClick(blog.uniqueid)}
+       
         >
         
           <div className="blog-right">
-            <div className='credentials'>
+            <div className='credentials'   onClick={() => handleBlogClick(blog.uniqueid)}>
           
             <div className="blog-author">
               <img className="blog_author_img" src={`https://picsum.photos/${index*100}`}alt="" />
@@ -118,7 +118,7 @@ const handleBlogClick = (blogId) => {
             </div>
           
           </div>
-          <div className="blog-left">
+          <div className="blog-left" onClick={() => handleBlogClick(blog.uniqueid)}>
             <img
               src={blog.image}
               alt={blog.title}
