@@ -1,28 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ProfileStrength.css";
 
-const ProfileStrength = ({ profileStrength }) => {
- 
+import { useFirebase } from "../Context/FirebaseContext";
+import { doc, collection, onSnapshot } from 'firebase/firestore';
+
+const ProfileStrength = () => {
+
+  const { user, db } = useFirebase();
+
+  
+  const [strength, setStrength] = useState(20);
+
+  const usersCollection = collection(db, "users");
+  console.log(user)
+  const userDocRef = doc(usersCollection, user.uid);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(userDocRef, (docSnapshot) => {
+      if (docSnapshot.exists()) {
+        const userData = docSnapshot.data();
+      
+        setStrength(calculateStrength(userData));
+      }
+    });
+
+    return () => unsubscribe();
+  }, [user, userDocRef]);
+
+  const calculateStrength = (userData) => {
+    let hasEmail = userData?.email ? 1 : 0;
+    let hasName = userData?.name ? 1 : 0;
+    let hasPicture = userData?.profilepic ? 1 : 0;
+    let hasInterests = userData?.interests ? 1 : 0;
+    let hasGoals = userData?.goals ? 1 : 0;
+
+    let profileStrength = hasEmail * 10 + hasName * 10 + hasPicture * 30 + hasInterests * 25 + hasGoals * 25;
+
+    return profileStrength;
+  }
   const progressBarStyle = {
-    width: `${profileStrength}%`,
+    width: `${strength}%`,
   };
 
   let progressBarColorClass = "";
-  if (profileStrength <= 33) {
+  if (strength <= 33) {
     progressBarColorClass = "red"; 
-  } else if (profileStrength <= 66) {
+  } else if (strength <= 66) {
     progressBarColorClass = "green";
   } else {
     progressBarColorClass = "orange"; 
   }
 
   let type = "";
-  if (profileStrength <= 33) {
+  if (strength <= 33) {
     type = "Beginner"; 
-  } else if (profileStrength <= 66) {
+  } else if (strength <= 66) {
     type = "Intermediate"; 
-  } else {
+  } else if(strength<=100) {
     type = "Pro";  
+  }
+  else{
+    type= "Loading..."
   }
 
   const TypeStyle = {
@@ -45,6 +83,9 @@ const ProfileStrength = ({ profileStrength }) => {
 
     </>
   );
+
 };
+
+
 
 export default ProfileStrength;

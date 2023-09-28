@@ -10,7 +10,9 @@ import Blog from './Components/Blog/Blog';
 import { SignIn } from './Components/Auth/Signin';
 import Profile from './Components/Profile/Profile';
 import Navbar from './Components/Navbar/Navbar';
- 
+
+
+import { FirebaseProvider } from "./Components/Context/FirebaseContext.jsx";
 
 const App = () => {
 
@@ -43,6 +45,7 @@ const App = () => {
   ];
 
   return (
+    <FirebaseProvider>
     <div className="App">
              <Router>
               <Navbar/>
@@ -67,6 +70,7 @@ const App = () => {
       </Routes>
   </Router>
     </div>
+    </FirebaseProvider>
   );
 };
 

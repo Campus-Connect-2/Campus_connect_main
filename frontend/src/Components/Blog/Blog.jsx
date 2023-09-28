@@ -32,7 +32,7 @@ const Blog = () => {
          } catch (error) {
             alert(error)
          }
-    console.log(blog)
+   
        
     }
 

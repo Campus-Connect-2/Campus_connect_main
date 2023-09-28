@@ -11,6 +11,7 @@
     margin-bottom: 10px;
     padding: 8px 3px;
     border: none;
+    outline: none;
     color: black;
     font-family: "Montserrat";
   }
@@ -69,7 +70,6 @@
 .tag-input {
   padding: 10px;
   /* Border color */
-  border-radius: 5px;
   margin-top: 10px;
   width: 30vw;
   font-size: 16px;

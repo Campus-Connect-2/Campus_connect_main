@@ -166,7 +166,7 @@ const New_Blog = () => {
         await uploadBytes(imageRef, image);
        
         const imageUrl = await getDownloadURL(imageRef);
-        console.log(imageUrl);
+        
         blogData.image = imageUrl;
 
       } catch (error) {
@@ -217,7 +217,6 @@ const New_Blog = () => {
         Publish
       </button>
      
-      
       <input
         className="editor-title"
         type="text"

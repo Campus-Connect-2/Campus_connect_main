@@ -21,7 +21,7 @@ const LandingPage = () => {
               ...doc.data(), id:doc.id
             }
           ))
-          console.log(res)
+         
       
          } catch (error) {
             alert(error)
@@ -36,7 +36,7 @@ const LandingPage = () => {
   return (
     <>
     <div>hello {auth?.currentUser?.email}</div>
- 
+     
     </>
   )
 }

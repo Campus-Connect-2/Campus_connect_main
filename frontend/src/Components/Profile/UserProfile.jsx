@@ -15,11 +15,9 @@ function UserProfile() {
   useEffect(() => {
 
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
-      if (currentUser) {
-        
+      if (currentUser) {      
         setUser(currentUser);
-      } else {
-     
+      } else {     
         setUser(null);
       }
     });
@@ -29,7 +27,7 @@ function UserProfile() {
 
   useEffect(() => {
     
-    console.log(user)
+  
     async function fetchUserData(user) {
         
         try {
@@ -52,12 +50,11 @@ function UserProfile() {
 
       async function fetchUserDetails(uid) {
         try {
-          console.log(user.email)
+         
           let userQuery;
             userQuery = query(usersCollection, where('email', '==', user?.email));
 
           const userData = await getDocs(userQuery);
-         console.log(usersCollection)
           if (!userData.empty) {
             const userDoc = userData.docs[0].data();
             setUserdetails(userDoc);
@@ -79,7 +76,7 @@ function UserProfile() {
       }, 500)
       
       
-  }, [user]);
+  }, [user, userdetails]);
 
   return (
     <div className="user-profile">

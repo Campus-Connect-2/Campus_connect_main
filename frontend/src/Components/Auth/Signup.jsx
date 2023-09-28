@@ -22,7 +22,8 @@ export const Signup = () => {
       const userData = {
         email: user.email,
         name: name,
-        college: college
+        college: college,
+        profileStrength: 20
       };
       await setDoc(userRef, userData);
 

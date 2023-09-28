@@ -23,7 +23,7 @@ useEffect(()=>{
             ...doc.data(), id:doc.id
           }
         ))
-        console.log(res)
+        
          setUsers(res)
        } catch (error) {
           alert(error)
