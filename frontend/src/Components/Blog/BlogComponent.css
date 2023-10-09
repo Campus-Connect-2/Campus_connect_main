@@ -1,0 +1,10 @@
+.top{
+    background-color: #000;
+}
+
+.horizontal-bar {
+    margin: 10px;
+    width: 90%;
+    height: 4px; 
+    background-color: black;
+  }

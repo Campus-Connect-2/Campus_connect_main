@@ -1,0 +1,5 @@
+.statsSubBox:hover{
+    background-color:#BBDDF5;
+    border-radius:15px;
+    box-shadow:0px 5px 3px rgba(0, 0, 0, 0.3);
+}
