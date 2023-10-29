@@ -20,11 +20,12 @@ function BlogComponent({ blog }) {
   const headerStyle = {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'space-between',
     marginBottom: '10px',
   };
 
   const imageStyle = {
-    maxWidth: '55vw',
+    maxWidth: '75vw',
     maxHeight: '35vh',
     borderRadius: '8px',
     marginRight: '10px',
@@ -42,14 +43,15 @@ function BlogComponent({ blog }) {
   };
 
   const tagStyle = {
-    backgroundColor: '#f2f2f2',
+    backgroundColor: 'rgb(0,0,0,0.3)',
     padding: '4px 8px',
     margin: '4px',
     borderRadius: '4px',
   };
 
   const titleStyle = {
-    fontSize: '24px',
+    fontSize: '36px',
+    font: 'bold',
     fontWeight: 'bold',
     marginBottom: '10px',
   };
@@ -59,12 +61,16 @@ function BlogComponent({ blog }) {
   return (
     <div className="outerblog" >
     <div className="top" style={containerStyle}>
-      <div style={headerStyle}>
-        <img src={blog.image} alt={blog.title} style={imageStyle} />
+  
+      <h2 style={titleStyle}>{blog.title}</h2>
+      <br />
+        
         <div style={authorInfoStyle}>
-        <h2 style={titleStyle}>{blog.title}</h2>
-          <p>Author: {blog.author}</p>
-          <p> Created: {blog.date}</p>
+        <div style={headerStyle}>
+          <p> <b>{blog.author}</b></p>
+          <p>  <b>{blog.date}</b></p>
+          </div>
+          <img src={blog.image} alt={blog.title} style={imageStyle} />
           <div style={tagsStyle}>
             {blog.tags?.map((tag, index) => (
               <span key={index} style={tagStyle}>
@@ -72,7 +78,7 @@ function BlogComponent({ blog }) {
               </span>
             ))}
           </div>
-        </div>
+        
       </div>
       <div className="horizontal-bar"></div>
      
