@@ -151,7 +151,7 @@ const New_Blog = () => {
       uniqueid: v4(),
       title: title,
       content: content,
-      author: auth?.currentUser?.email,
+      author: auth?.currentUser?.name,
       tags: tags,
       date: formattedDate,
       readtime: calculateReadingTime(content),

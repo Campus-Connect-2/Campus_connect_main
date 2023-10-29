@@ -8,6 +8,7 @@ function BlogComponent({ blog }) {
     fontFamily:"Montserrat",
     flexDirection: 'column',
     alignItems: 'center',
+    fontSize: '20px',
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
     padding: '10px',
     borderRadius: '8px',
@@ -75,7 +76,7 @@ function BlogComponent({ blog }) {
       </div>
       <div className="horizontal-bar"></div>
      
-      <div dangerouslySetInnerHTML={{ __html: blog.content }} />
+      <div className='blog-text-data' dangerouslySetInnerHTML={{ __html: blog.content }} />
     </div></div>
   );
 }
