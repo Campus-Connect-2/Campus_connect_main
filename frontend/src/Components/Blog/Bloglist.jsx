@@ -87,7 +87,7 @@ const handleBlogClick = (blogId) => {
     
     <div className="blog-list">
       {blogs.map((blog, index) => (
-        <div className="blog-item" key={blog.uniqueid}
+        <div className="blog-item" key={index}
        
         >
         

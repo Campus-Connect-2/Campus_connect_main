@@ -10,7 +10,6 @@ export const useFirebase = () => {
 
 export const FirebaseProvider = ({ children }) => {
   const [user, setUser] = useState(null);
- 
 
   useEffect(() => {
     
@@ -29,7 +28,7 @@ export const FirebaseProvider = ({ children }) => {
   }, []);
 
   return (
-    <FirebaseContext.Provider value={{ user, db}}>
+    <FirebaseContext.Provider value={{user, db}}>
       {children}
     </FirebaseContext.Provider>
   );

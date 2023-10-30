@@ -6,41 +6,23 @@ import InterestsModal from './InterestsModal';
 import GoalsModal from './GoalsModal';
 import UserProfile from './UserProfile';
 import {auth} from "../../../Firebase/firebase"
+import { useFirebase } from '../Context/FirebaseContext';
+
 
 const Profile = () => {
 
- 
+
+  const { user,db } = useFirebase()
+ if(!user){
+  return (
+    <>Please log in</>
+  )
+ }  
 
  const [isProfilePicModalOpen, setProfilePicOpen] = useState(false);
  const [isInterestsModalOpen, setInterestsOpen] = useState(false);
  const [isGoalsModalOpen, setGoalsOpen] = useState(false);
 
- const [user, setUser] = useState(auth.currentUser);
-
-
-
-
- useEffect(() => {
-
-  const unsubscribe = auth.onAuthStateChanged((currentUser) => {
-    if (currentUser) {
-      
-      setUser(currentUser);
-
-
-      
-    } else {
-   
-      setUser(null);
-    }
-  });
-
-  // console.log(userData.ProfileStrength)
-
-  return () => unsubscribe();
-
-  
-}, [user]);
 
 
 
@@ -49,29 +31,31 @@ const Profile = () => {
 
   return (
     <>
-  
-    <ProfileStrength/>
-    <ProfilePictureModal 
+  {!user && <div>Please log in</div>}
+    {user && <ProfileStrength/>}
+    {user && <ProfilePictureModal 
     isOpen={isProfilePicModalOpen}   
     setOpen={setProfilePicOpen}
-    />
-    <InterestsModal
+    />}
+    {user && <InterestsModal
     isOpen={isInterestsModalOpen}
-    setOpen={setInterestsOpen}/>
-    <GoalsModal
+    setOpen={setInterestsOpen}/>}
+    {user && <GoalsModal
     isOpen={isGoalsModalOpen}
-    setOpen={setGoalsOpen}/>
+    setOpen={setGoalsOpen}/>}
 
-    <UserProfile />
-    <button onClick={()=>{
+    {user && <UserProfile />}
+    <div className='user-data-update'>
+   <button onClick={()=>{
         setProfilePicOpen(true)
-    }}> Update display picture</button>
+    }} className='update-button'> Update display picture</button>
     <button onClick={()=>{
         setInterestsOpen(true)
-    }}>Update Interests</button>
+    }} className='update-button'>Update Interests</button>
     <button onClick={()=>{
         setGoalsOpen(true)
-    }}>Update Goals</button>
+    }} className='update-button'>Update Goals</button>
+    </div>
     </>
 
   )

@@ -1,25 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "./ProfileStrength.css";
-
 import { useFirebase } from "../Context/FirebaseContext";
-import { doc, collection, onSnapshot } from 'firebase/firestore';
+import { doc, collection, onSnapshot } from "firebase/firestore";
 
 const ProfileStrength = () => {
-
   const { user, db } = useFirebase();
-
-  
-  const [strength, setStrength] = useState(20);
-
   const usersCollection = collection(db, "users");
-  console.log(user)
   const userDocRef = doc(usersCollection, user.uid);
+  const [strength, setStrength] = useState(20);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(userDocRef, (docSnapshot) => {
       if (docSnapshot.exists()) {
         const userData = docSnapshot.data();
-      
         setStrength(calculateStrength(userData));
       }
     });
@@ -34,58 +27,55 @@ const ProfileStrength = () => {
     let hasInterests = userData?.interests ? 1 : 0;
     let hasGoals = userData?.goals ? 1 : 0;
 
-    let profileStrength = hasEmail * 10 + hasName * 10 + hasPicture * 30 + hasInterests * 25 + hasGoals * 25;
+    let profileStrength =
+      hasEmail * 10 +
+      hasName * 10 +
+      hasPicture * 30 +
+      hasInterests * 25 +
+      hasGoals * 25;
 
     return profileStrength;
-  }
+  };
+
   const progressBarStyle = {
     width: `${strength}%`,
   };
 
-  let progressBarColorClass = "";
-  if (strength <= 33) {
-    progressBarColorClass = "red"; 
-  } else if (strength <= 66) {
-    progressBarColorClass = "green";
-  } else {
-    progressBarColorClass = "orange"; 
-  }
-
-  let type = "";
-  if (strength <= 33) {
-    type = "Beginner"; 
-  } else if (strength <= 66) {
-    type = "Intermediate"; 
-  } else if(strength<=100) {
-    type = "Pro";  
-  }
-  else{
-    type= "Loading..."
-  }
+  const progressBarColorClass = () => {
+    if (strength <= 33) {
+      return "red";
+    } else if (strength <= 66) {
+      return "green";
+    } else {
+      return "orange";
+    }
+  };
 
   const TypeStyle = {
-    color: progressBarColorClass,
-    fontWeight:600,
-    fontSize: "28px"
+    color: progressBarColorClass(),
+    fontWeight: 600,
+    fontSize: "28px",
   };
 
   return (
     <>
-    <div className="profile-judge">
-   <h3>ProfileStrength</h3> 
-      
-   <h3 className= "profile-type"style={TypeStyle}>{type}</h3>
-   </div>
-    <div className={`progress-bar ${progressBarColorClass}`}>
-      <div className="progress" style={progressBarStyle}></div>
-      
-    </div>
-
+      <div className="profile-judge">
+        <h3>Profile Strength</h3>
+        <h3 className="profile-type" style={TypeStyle}>
+          {strength <= 33
+            ? "Beginner"
+            : strength <= 66
+            ? "Intermediate"
+            : strength <= 100
+            ? "Pro"
+            : "Loading..."}
+        </h3>
+      </div>
+      <div className={`progress-bar ${progressBarColorClass()}`}>
+        <div className="progress" style={progressBarStyle}></div>
+      </div>
     </>
   );
-
 };
-
-
 
 export default ProfileStrength;

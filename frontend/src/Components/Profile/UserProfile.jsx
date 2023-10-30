@@ -3,28 +3,29 @@ import { auth, db } from '../../../Firebase/firebase'
 import {getDocs, collection,  query, where } from "firebase/firestore"
 import "./UserProfile.css"
 import defaultDP from "./defualtDP.png"
+import { useFirebase } from '../Context/FirebaseContext';
 
 function UserProfile() {
 
-  const [user, setUser] = useState(null)
+  const {user, db} = useFirebase()
   const [blogs, setBlogs] = useState([])
   const [userdetails, setUserdetails] = useState(null)
   const blogsCollection = collection(db, "blogs")
    const usersCollection = collection(db, "users");
 
-  useEffect(() => {
 
-    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
-      if (currentUser) {      
-        setUser(currentUser);
-      } else {     
-        setUser(null);
-      }
-    });
 
-    return () => unsubscribe();
-  }, []);
+   const handleEditUserAbout = () => {
+    // Open a modal or other UI element to allow the user to edit their about section
+  };
 
+  const handleEditUserGoals = () => {
+    // Open a modal or other UI element to allow the user to edit their goals
+  };
+
+
+
+ 
   useEffect(() => {
     
   
@@ -79,18 +80,100 @@ function UserProfile() {
   }, [user, userdetails]);
 
   return (
-    <div className="user-profile">
-      <img className="profile-pic"
-      src =  {userdetails?.profilepic ? 
+<>
+
+<div class="card-container">
+
+  
+      <div class="card">
+        <div class="box">
+          <div class="imgContainer">
+            <img class="profile-pic"  src =  {userdetails?.profilepic ? 
         userdetails.profilepic :
         defaultDP
-        }>
-      </img>
-      <div className="user-details">
-        {userdetails?.name}
-        <p>{user ? userdetails?.college: 'Loading' }</p>
+        }/>
+          </div>
+          <div class="content">
+            <strong>{userdetails?.name}</strong>
+           
+			
+            <span>{user ? userdetails?.college: 'Loading' }</span>
+            <div class="divider"></div>
+        
+            <div class="profile-bottom">
+				
+        <h2>About</h2>
+      <p>{userdetails?.about || ""}</p>
+      <button onClick={handleEditUserAbout}>Edit</button>
+          
+        </div>
+      
+
+     
+
+
+          </div>
+        </div>
       </div>
+      
     </div>
+
+
+<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="programmingfans" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div className='user-meta-data'>
+
+  <section className="profile-interests">
+    <h2>Interests</h2>
+    <ul>
+      {userdetails?.interests?.map((interest) => (
+        <li key={interest}>{interest}</li>
+      ))}
+    </ul>
+  </section>
+  <section className="profile-goals">
+    <h2>Goals</h2>
+    <ul>
+      {userdetails?.goals?.map((goal, index) => (
+        <li key={index}>{goal}</li>
+      ))}
+    </ul>
+
+  </section>
+
+
+
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</>
   );
 }
 

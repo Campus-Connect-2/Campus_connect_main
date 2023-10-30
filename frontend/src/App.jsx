@@ -13,8 +13,12 @@ import Navbar from './Components/Navbar/Navbar';
 
 
 import { FirebaseProvider } from "./Components/Context/FirebaseContext.jsx";
+import { useFirebase } from "./Components/Context/FirebaseContext.jsx";
+
+
 
 const App = () => {
+ 
 
   const blogs = [
     {
@@ -46,6 +50,7 @@ const App = () => {
 
   return (
     <FirebaseProvider>
+     
     <div className="App">
              <Router>
               <Navbar/>
@@ -55,7 +60,7 @@ const App = () => {
         <Route path="/blogs" element={<BlogList blogs={blogs}/>} />
 
         <Route path="/new_blog" element={<New_Blog/>} />
-        <Route path="/profile" element={<Profile/>} />
+    <Route path="/profile" element={ <Profile/> } />
       
         <Route path="/signup" element={<Signup/>} />
         <Route path="/signin" element={<SignIn/>} />
